@@ -1,9 +1,11 @@
 package com.example.composemovie.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.composemovie.MainViewModel
 import com.example.composemovie.screens.MainScreen
 import com.example.composemovie.screens.SplashScreen
 import com.example.composemovie.utils.Constants.Screens.DETAIL_SCREEN
@@ -17,16 +19,16 @@ sealed class Screens(val route: String) {
 }
 
 @Composable
-fun SetupNavHost(navController: NavHostController) {
+fun SetupNavHost(navController: NavHostController, viewModel: MainViewModel) {
     NavHost(
         navController = navController,
         startDestination = Screens.Splash.route
     ) {
         composable(route = Screens.Splash.route) {
-            SplashScreen(navController)
+            SplashScreen(navController, viewModel)
         }
         composable(route = Screens.Main.route) {
-            MainScreen()
+            MainScreen(navController,viewModel)
         }
         composable(route = Screens.Details.route) {}
     }
