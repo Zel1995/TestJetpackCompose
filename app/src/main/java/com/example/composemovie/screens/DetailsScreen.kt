@@ -33,7 +33,7 @@ fun DetailsScreen(viewModel: MainViewModel, itemId: String) {
                     Image(
                         painter = rememberImagePainter(currentItem?.image?.medium),
                         contentDescription = null,
-                        modifier = Modifier.size(512.dp)
+                        modifier = Modifier.size(412.dp)
                     )
                     Text(
                         text = currentItem?.name ?: "",
