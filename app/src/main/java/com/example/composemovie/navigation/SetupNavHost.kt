@@ -1,11 +1,11 @@
 package com.example.composemovie.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.lifecycle.ViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.composemovie.MainViewModel
+import com.example.composemovie.screens.DetailsScreen
 import com.example.composemovie.screens.MainScreen
 import com.example.composemovie.screens.SplashScreen
 import com.example.composemovie.utils.Constants.Screens.DETAIL_SCREEN
@@ -28,8 +28,14 @@ fun SetupNavHost(navController: NavHostController, viewModel: MainViewModel) {
             SplashScreen(navController, viewModel)
         }
         composable(route = Screens.Main.route) {
-            MainScreen(navController,viewModel)
+            MainScreen(navController, viewModel)
         }
-        composable(route = Screens.Details.route) {}
+        composable(route = Screens.Details.route + "/{id}") { backStackEntry ->
+            DetailsScreen(
+                navController = navController,
+                viewModel = viewModel,
+                itemId = backStackEntry.arguments?.getString("id") ?: "1"
+            )
+        }
     }
 }
